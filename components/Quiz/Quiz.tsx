@@ -313,41 +313,40 @@ export function Quiz({ onClose }: QuizProps) {
                   </div>
 
                   {/* Como funciona */}
-                  <div className="mb-5 rounded-xl bg-off-white p-4">
-                    <h4 className="mb-2 font-heading text-[13px] font-semibold text-dark">Como funciona</h4>
-                    <p className="font-body text-[12.5px] leading-relaxed text-text-mid">
-                      Semelhante a um alinhador dentário, o EA Air avança a mandíbula em milímetros durante o sono, impedindo que a língua e os tecidos moles colapsem sobre as vias aéreas. Resultado: ar passa livremente, o ronco para e a oxigenação se normaliza.
+                  <div className="mb-5 rounded-xl bg-off-white p-3.5">
+                    <h4 className="mb-1.5 font-heading text-[13px] font-semibold text-dark">Como funciona</h4>
+                    <p className="font-body text-[12px] leading-relaxed text-text-mid">
+                      Semelhante a um alinhador, o EA Air avança a mandíbula milimetricamente durante o sono, impedindo o colapso das vias aéreas. O ar passa livre, o ronco para e a oxigenação se normaliza.
                     </p>
                   </div>
 
-                  {/* Beneficios */}
+                  {/* Beneficios — compactos */}
                   <h4 className="mb-3 font-heading text-[14px] font-semibold text-dark">Por que escolher o EA Air</h4>
-                  <div className="mb-5 space-y-2.5">
+                  <div className="mb-5 space-y-2">
                     {[
-                      { icon: Moon, title: "Sono Profundo e Reparador", desc: "Elimina o ronco e as pausas respiratórias, permitindo que seu corpo atinja todas as fases do sono — incluindo o sono profundo essencial para regeneração celular." },
-                      { icon: HeartPulse, title: "Proteção Cardiovascular", desc: "Mantém a oxigenação adequada durante toda a noite, reduzindo a sobrecarga no coração e prevenindo hipertensão, arritmias e risco de infarto." },
-                      { icon: Brain, title: "Clareza Mental e Energia", desc: "Com sono de qualidade, você acorda com disposição real. Mais concentração, memória afiada e humor estável ao longo de todo o dia." },
-                      { icon: Smile, title: "Confortável e Discreto", desc: "Design ergonômico e estético que se adapta à sua arcada. Sem barulho, sem fios, sem máquinas. Confortável desde a primeira noite." },
-                      { icon: Activity, title: "Prático e Portátil", desc: "Diferente do CPAP, não precisa de eletricidade. Cabe na palma da mão — ideal para viagens e uso diário sem complicação." },
-                      { icon: Shield, title: "Acompanhamento Especializado", desc: "Moldado e ajustado por um dentista credenciado em odontologia do sono, garantindo encaixe perfeito e resultado otimizado para o seu caso." },
+                      { icon: Moon, title: "Sono Reparador", desc: "Elimina ronco e pausas respiratórias para um sono profundo e restaurador" },
+                      { icon: HeartPulse, title: "Proteção Cardiovascular", desc: "Oxigenação adequada toda noite, prevenindo hipertensão e risco cardíaco" },
+                      { icon: Brain, title: "Clareza Mental", desc: "Mais energia, concentração e humor estável ao longo do dia" },
+                      { icon: Smile, title: "Conforto e Discrição", desc: "Design ergonômico, sem barulho, sem fios. Confortável desde a 1a noite" },
+                      { icon: Activity, title: "Portátil", desc: "Sem eletricidade, cabe na mão. Ideal para viagens" },
+                      { icon: Shield, title: "Acompanhamento Profissional", desc: "Ajustado por dentista credenciado em odontologia do sono" },
                     ].map((b) => (
-                      <div key={b.title} className="flex gap-3.5 rounded-xl border-[1.5px] border-border bg-white p-3.5">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-light">
-                          <b.icon className="h-[18px] w-[18px] text-blue" />
+                      <div key={b.title} className="flex gap-3 rounded-xl border-[1.5px] border-border bg-white p-3">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-light">
+                          <b.icon className="h-4 w-4 text-blue" />
                         </div>
                         <div>
-                          <h5 className="mb-0.5 font-heading text-[13px] font-semibold text-dark">{b.title}</h5>
-                          <p className="font-body text-[12px] leading-relaxed text-text-mid">{b.desc}</p>
+                          <h5 className="font-heading text-[12.5px] font-semibold text-dark">{b.title}</h5>
+                          <p className="font-body text-[11.5px] leading-snug text-text-mid">{b.desc}</p>
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Para quem */}
-                  <div className="mb-5 rounded-xl border-[1.5px] border-blue/15 bg-blue-light p-4">
-                    <h4 className="mb-2 font-heading text-[13px] font-semibold text-dark">Para quem é indicado</h4>
-                    <p className="font-body text-[12.5px] leading-relaxed text-text-mid">
-                      Adultos com ronco primário e apneia obstrutiva leve a moderada, ou como alternativa ao CPAP quando o paciente não se adaptou. A indicação é sempre feita por um profissional credenciado após avaliação clínica.
+                  {/* Indicacao */}
+                  <div className="mb-4 rounded-xl border-[1.5px] border-blue/15 bg-blue-light p-3.5">
+                    <p className="font-body text-[12px] leading-relaxed text-text-mid">
+                      <span className="font-heading font-semibold text-dark">Indicado para</span> adultos com ronco e apneia leve a moderada, ou como alternativa ao CPAP. Sempre com acompanhamento profissional.
                     </p>
                   </div>
                 </div>
