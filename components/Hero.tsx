@@ -68,21 +68,10 @@ export function Hero({ onStartQuiz }: HeroProps) {
           />
         </motion.div>
 
-        {/* Badge */}
-        <motion.div
-          className="mb-5 flex items-center gap-[7px] self-start rounded-full border border-white/[0.08] bg-white/[0.06] px-3.5 py-[7px] backdrop-blur-xl lg:self-center lg:mb-8 lg:px-5 lg:py-2"
-          {...fadeUp(0.25)}
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.4)] animate-pulse" />
-          <span className="font-body text-[11.5px] text-white/60 lg:text-[13px]">
-            Teste gratuito em 2 min
-          </span>
-        </motion.div>
-
         {/* Title */}
         <motion.h1
           className="mb-3.5 font-heading text-[27px] font-semibold leading-[1.2] text-white/95 tracking-tight md:text-[36px] lg:text-center lg:text-[52px] lg:leading-[1.15] lg:mb-6 lg:max-w-[700px]"
-          {...fadeUp(0.4)}
+          {...fadeUp(0.25)}
         >
           Uma boa noite de sono{" "}
           <br className="hidden lg:block" />
@@ -95,7 +84,7 @@ export function Hero({ onStartQuiz }: HeroProps) {
         {/* Subtitle */}
         <motion.p
           className="mb-8 max-w-[260px] font-body text-sm font-light leading-relaxed text-white/45 md:max-w-[380px] md:text-base lg:text-center lg:max-w-[520px] lg:text-lg lg:leading-relaxed lg:mb-10 lg:text-white/50"
-          {...fadeUp(0.55)}
+          {...fadeUp(0.4)}
         >
           Descubra se você tem sinais de apneia obstrutiva do sono com nosso
           teste rápido e gratuito.
@@ -104,7 +93,7 @@ export function Hero({ onStartQuiz }: HeroProps) {
         {/* CTAs */}
         <motion.div
           className="flex w-full flex-col gap-2.5 lg:flex-row lg:justify-center lg:gap-4 lg:max-w-[520px] lg:mx-auto"
-          {...fadeUp(0.7)}
+          {...fadeUp(0.55)}
         >
           <Button
             variant="primary"
@@ -127,7 +116,7 @@ export function Hero({ onStartQuiz }: HeroProps) {
         {/* Stats */}
         <motion.div
           className="mt-4 grid w-full grid-cols-3 gap-px overflow-hidden rounded-xl bg-white/[0.04] md:max-w-[380px] lg:mt-10 lg:mx-auto lg:max-w-[540px] lg:rounded-2xl"
-          {...fadeUp(0.85)}
+          {...fadeUp(0.7)}
         >
           {[
             { value: "1 em 3", label: "pessoas tem apneia" },
