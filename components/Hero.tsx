@@ -55,9 +55,9 @@ export function Hero({ onStartQuiz }: HeroProps) {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex min-h-screen flex-col justify-end px-5 pb-6 pt-14 md:pt-20 lg:items-center lg:justify-center lg:px-12 lg:pt-0 lg:pb-0">
-        {/* Logo */}
-        <motion.div className="mb-5 lg:mb-10" {...fadeUp(0.1)}>
+      <div className="relative z-10 mx-auto flex min-h-screen flex-col px-5 pb-6 pt-14 md:pt-20 lg:items-center lg:justify-center lg:px-12 lg:pt-0 lg:pb-0">
+        {/* Logo — fica no topo no mobile */}
+        <motion.div className="mb-auto lg:mb-10" {...fadeUp(0.1)}>
           <Image
             src="/images/ea-logo.png"
             alt="EA Esthetic Aligner"
