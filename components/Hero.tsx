@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 interface HeroProps {
   onStartQuiz: () => void;
@@ -41,11 +42,15 @@ export function Hero({ onStartQuiz }: HeroProps) {
       {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[600px] flex-col px-5 pb-6 pt-14 md:items-center md:justify-center md:pt-20 md:text-center lg:max-w-[720px] lg:px-8 lg:py-24">
         {/* Logo */}
-        <div className="mb-8 flex items-center gap-2.5 md:justify-center">
-          <div className="flex h-[34px] w-[34px] items-center justify-center rounded-[9px] bg-white/95 shadow-lg">
-            <span className="font-heading text-xs font-extrabold text-blue tracking-tight">EA</span>
-          </div>
-          <span className="font-heading text-[15px] font-medium text-white/85 tracking-wide">EA Air</span>
+        <div className="mb-8 flex items-center md:justify-center">
+          <Image
+            src="/images/ea-logo.png"
+            alt="EA Esthetic Aligner"
+            width={180}
+            height={39}
+            className="brightness-0 invert opacity-90 lg:w-[220px]"
+            priority
+          />
         </div>
 
         {/* Badge */}
