@@ -27,35 +27,41 @@ interface QuizProps {
 // ── Risk-specific report content ──────────────────────────────────
 const reportContent: Record<RiskLevel, {
   summary: string;
-  impacts: string[];
+  impacts: { text: string; bold: string }[];
+  alert: string;
   recommendation: string;
 }> = {
   high: {
-    summary: "Há uma probabilidade considerável de que sua respiração esteja sendo interrompida durante o sono, impactando seriamente sua saúde.",
+    summary: "Sua respiração provavelmente está sendo interrompida dezenas de vezes por noite. Cada parada pode durar até 30 segundos, privando seu cérebro e coração de oxigênio.",
     impacts: [
-      "Interrupções respiratórias frequentes reduzem o oxigênio no sangue",
-      "Sono fragmentado impede a recuperação do corpo e da mente",
-      "Risco aumentado de hipertensão, problemas cardíacos e AVC",
+      { bold: "Infarto e AVC", text: "— a apneia não tratada triplica o risco de eventos cardiovasculares. O coração é sobrecarregado toda noite." },
+      { bold: "Morte súbita durante o sono", text: "— episódios graves de dessaturação podem levar a arritmias fatais, especialmente entre 00h e 6h." },
+      { bold: "Diabetes e obesidade", text: "— a privação crônica de sono altera hormônios como leptina e grelina, criando um ciclo vicioso de ganho de peso." },
+      { bold: "Acidentes de trânsito", text: "— sonolência diurna causada pela apneia é comparável a dirigir alcoolizado. O risco de acidentes é 5x maior." },
     ],
-    recommendation: "Procure um profissional credenciado o mais breve possível. A apneia não tratada tende a se agravar com o tempo.",
+    alert: "A apneia obstrutiva do sono não tratada reduz a expectativa de vida em até 20 anos.",
+    recommendation: "Você precisa de avaliação profissional urgente. Cada noite sem tratamento é uma noite de dano acumulado ao seu corpo.",
   },
   moderate: {
-    summary: "Há sinais que merecem atenção. Embora não seja alarmante, o quadro pode se agravar sem acompanhamento.",
+    summary: "Seu corpo está dando sinais de que algo não vai bem durante o sono. Sem acompanhamento, esse quadro tende a piorar progressivamente.",
     impacts: [
-      "Possíveis obstruções parciais das vias aéreas durante o sono",
-      "Qualidade do sono comprometida, causando cansaço diurno",
-      "Fatores de risco presentes que podem se intensificar",
+      { bold: "Hipertensão silenciosa", text: "— a apneia moderada já eleva a pressão arterial. Muitos hipertensos não sabem que a causa está no sono." },
+      { bold: "Envelhecimento acelerado", text: "— sem sono profundo, seu corpo não regenera tecidos, não consolida memórias e não regula hormônios adequadamente." },
+      { bold: "Depressão e ansiedade", text: "— a fragmentação do sono está diretamente ligada a distúrbios de humor que pioram com o tempo." },
+      { bold: "Progressão para risco alto", text: "— ganho de peso, envelhecimento e hábitos podem transformar risco moderado em grave em poucos anos." },
     ],
-    recommendation: "Uma avaliação profissional pode identificar o problema cedo e prevenir complicações futuras.",
+    alert: "80% das pessoas com apneia moderada evoluem para quadros graves se não tratam nos primeiros anos.",
+    recommendation: "Não espere os sintomas se agravarem. Uma avaliação agora pode evitar complicações sérias no futuro.",
   },
   low: {
-    summary: "Seus indicadores estão dentro da normalidade. Boa notícia, mas vale manter atenção aos sinais do corpo.",
+    summary: "Seus indicadores estão controlados, mas isso não significa imunidade. A apneia pode se desenvolver silenciosamente.",
     impacts: [
-      "Fatores de risco em níveis controlados",
-      "Padrão de sono aparentemente saudável",
-      "Mudanças de peso ou hábitos podem alterar o risco",
+      { bold: "Ronco é um alerta", text: "— mesmo sem apneia hoje, o ronco indica resistência nas vias aéreas que pode evoluir." },
+      { bold: "Fatores mutáveis", text: "— ganho de peso, consumo de álcool e envelhecimento podem alterar seu risco rapidamente." },
+      { bold: "Prevenção é mais barata que tratamento", text: "— identificar o problema cedo evita consequências cardiovasculares e metabólicas." },
     ],
-    recommendation: "Se você tem ronco frequente ou cansaço diurno, uma consulta pode garantir que seu sono é realmente reparador.",
+    alert: "1 em cada 3 adultos desenvolve apneia ao longo da vida. Monitorar seus fatores de risco é fundamental.",
+    recommendation: "Se você ronca ou acorda cansado com frequência, vale uma avaliação preventiva com um profissional.",
   },
 };
 
@@ -200,63 +206,83 @@ export function Quiz({ onClose }: QuizProps) {
           </>
         )}
 
-        {/* ===== RELATORIO COMPLETO (viewport-fit, sem scroll) ===== */}
+        {/* ===== RELATORIO COMPLETO ===== */}
         {phase === "full-report" && result && report && (
           <>
             <Topbar />
-            <div className="flex flex-1 flex-col px-5 py-4">
-              <div className="mx-auto w-full max-w-[480px]">
-                {/* Score + label */}
-                <div className="mb-3 flex items-center gap-3">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `${result.riskColor}15` }}>
-                    <span className="font-heading text-base font-bold" style={{ color: result.riskColor }}>{result.score}/{result.maxScore}</span>
-                  </div>
-                  <div>
-                    <p className="font-heading text-[10px] font-semibold uppercase tracking-[1.5px]" style={{ color: result.riskColor }}>{result.riskLabel}</p>
-                    <h2 className="font-heading text-[17px] font-semibold text-dark tracking-tight">Seu Relatório</h2>
-                  </div>
-                </div>
-
-                {/* Barra */}
-                <div className="mb-4 w-full">
-                  <div className="mb-1 h-1.5 overflow-hidden rounded-full bg-slate-100">
-                    <div className="h-full rounded-full bg-gradient-to-r from-green via-yellow-400 via-orange to-red" style={{ width: `${result.percentage}%` }} />
-                  </div>
-                  <div className="flex justify-between font-body text-[8px] font-medium uppercase tracking-[1px]">
-                    <span className="text-green">Baixo</span>
-                    <span className="text-text-light">Moderado</span>
-                    <span className="text-red">Alto</span>
-                  </div>
-                </div>
-
-                {/* Sumario */}
-                <p className="mb-4 font-body text-[12.5px] leading-relaxed text-text-mid">
-                  {report.summary}
-                </p>
-
-                {/* Impactos */}
-                <div className="mb-4 space-y-2">
-                  {report.impacts.map((impact, i) => (
-                    <div key={i} className="flex gap-2.5 rounded-xl bg-off-white p-2.5">
-                      <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: result.riskColor }} />
-                      <p className="font-body text-[12px] leading-snug text-text-mid">{impact}</p>
+            <div className="flex-1 overflow-y-auto">
+              <div className="px-5 py-5">
+                <div className="mx-auto max-w-[480px]">
+                  {/* Score header */}
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `${result.riskColor}15` }}>
+                      <span className="font-heading text-lg font-bold" style={{ color: result.riskColor }}>{result.score}/{result.maxScore}</span>
                     </div>
-                  ))}
+                    <div>
+                      <p className="font-heading text-[11px] font-semibold uppercase tracking-[2px]" style={{ color: result.riskColor }}>{result.riskLabel}</p>
+                      <h2 className="font-heading text-[18px] font-semibold text-dark tracking-tight">Seu Relatório Completo</h2>
+                    </div>
+                  </div>
+
+                  {/* Barra de risco */}
+                  <div className="mb-5">
+                    <div className="mb-1.5 h-2 overflow-hidden rounded-full bg-slate-100">
+                      <div className="h-full rounded-full bg-gradient-to-r from-green via-yellow-400 via-orange to-red" style={{ width: `${result.percentage}%` }} />
+                    </div>
+                    <div className="flex justify-between font-body text-[9px] font-medium uppercase tracking-[1px]">
+                      <span className="text-green">Baixo</span>
+                      <span className="text-text-light">Moderado</span>
+                      <span className="text-red">Alto</span>
+                    </div>
+                  </div>
+
+                  {/* Sumario */}
+                  <p className="mb-5 font-body text-[13px] leading-relaxed text-text">
+                    {report.summary}
+                  </p>
+
+                  {/* Alerta em destaque */}
+                  <div className="mb-5 rounded-xl p-3.5" style={{ backgroundColor: `${result.riskColor}08`, borderLeft: `3px solid ${result.riskColor}` }}>
+                    <div className="flex items-start gap-2">
+                      <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" style={{ color: result.riskColor }} />
+                      <p className="font-body text-[12.5px] font-medium leading-snug text-dark">
+                        {report.alert}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Riscos detalhados */}
+                  <h4 className="mb-3 font-heading text-[14px] font-semibold text-dark">
+                    O que você está arriscando
+                  </h4>
+                  <div className="mb-5 space-y-2.5">
+                    {report.impacts.map((impact, i) => (
+                      <div key={i} className="rounded-xl border-[1.5px] border-border bg-off-white p-3.5">
+                        <p className="font-body text-[12.5px] leading-relaxed text-text-mid">
+                          <span className="font-heading font-semibold text-dark">{impact.bold}</span>
+                          {impact.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Recomendacao */}
+                  <div className="mb-5 rounded-xl border-[1.5px] border-blue/15 bg-blue-light p-4">
+                    <div className="mb-1.5 flex items-center gap-2 font-heading text-[13px] font-semibold text-dark">
+                      <ShieldCheck className="h-4 w-4 text-blue" />
+                      Recomendação
+                    </div>
+                    <p className="font-body text-[12.5px] leading-relaxed text-text-mid">
+                      {report.recommendation}
+                    </p>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Espaco */}
-              <div className="flex-1" />
-
-              {/* Recomendacao + CTA embaixo */}
-              <div className="mx-auto w-full max-w-[480px]">
-                <div className="mb-4 rounded-xl border-[1.5px] border-blue/15 bg-blue-light px-3.5 py-3">
-                  <div className="mb-1 flex items-center gap-1.5 font-heading text-[11px] font-semibold text-dark">
-                    <ShieldCheck className="h-3.5 w-3.5 text-blue" />
-                    Recomendação
-                  </div>
-                  <p className="font-body text-[11.5px] leading-snug text-text-mid">{report.recommendation}</p>
-                </div>
+            {/* CTA fixo embaixo */}
+            <div className="shrink-0 border-t border-slate-100 bg-white px-5 py-4">
+              <div className="mx-auto max-w-[400px]">
                 <Button variant="blue" onClick={() => setPhase("solution")}>
                   Ver a solução
                   <ArrowRight className="h-4 w-4" />
@@ -266,55 +292,71 @@ export function Quiz({ onClose }: QuizProps) {
           </>
         )}
 
-        {/* ===== SOLUCAO EA AIR (viewport-fit, sem scroll) ===== */}
+        {/* ===== SOLUCAO EA AIR ===== */}
         {phase === "solution" && result && (
           <>
             <Topbar showBack onBack={() => setPhase("full-report")} />
-            <div className="flex flex-1 flex-col px-5 py-4">
-              <div className="mx-auto w-full max-w-[480px]">
-                {/* Header */}
-                <div className="mb-4 text-center">
-                  <span className="mb-1 inline-block font-heading text-[10px] font-semibold uppercase tracking-[2.5px] text-blue">
-                    A Solução
-                  </span>
-                  <h2 className="mb-1.5 font-heading text-[20px] font-semibold text-dark tracking-tight">
-                    Esthetic Aligner AIR
-                  </h2>
-                  <p className="mx-auto max-w-[340px] font-body text-[12px] leading-relaxed text-text-mid">
-                    Aparelho intraoral que reposiciona a mandíbula durante o sono, mantendo as vias aéreas abertas. Silencioso, portátil, sem eletricidade.
-                  </p>
-                </div>
+            <div className="flex-1 overflow-y-auto">
+              <div className="px-5 py-5">
+                <div className="mx-auto max-w-[480px]">
+                  {/* Header */}
+                  <div className="mb-5 text-center">
+                    <span className="mb-2 inline-block font-heading text-[10px] font-semibold uppercase tracking-[2.5px] text-blue">
+                      A Solução
+                    </span>
+                    <h2 className="mb-2 font-heading text-[22px] font-semibold text-dark tracking-tight">
+                      Esthetic Aligner AIR
+                    </h2>
+                    <p className="mx-auto max-w-[400px] font-body text-[13px] leading-relaxed text-text-mid">
+                      Um aparelho intraoral que reposiciona suavemente a mandíbula durante o sono, mantendo as vias aéreas abertas e eliminando as interrupções respiratórias.
+                    </p>
+                  </div>
 
-                {/* 3 beneficios compactos */}
-                <div className="mb-3 space-y-2">
-                  {[
-                    { icon: Moon, title: "Sono Reparador", desc: "Reduz ronco e pausas respiratórias para um sono profundo e restaurador" },
-                    { icon: HeartPulse, title: "Saúde Protegida", desc: "Mantém oxigenação adequada, prevenindo riscos cardiovasculares" },
-                    { icon: Smile, title: "Conforto Total", desc: "Design ergonômico e discreto, confortável desde a primeira noite" },
-                  ].map((b) => (
-                    <div key={b.title} className="flex gap-3 rounded-xl bg-off-white p-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-light">
-                        <b.icon className="h-4 w-4 text-blue" />
+                  {/* Como funciona */}
+                  <div className="mb-5 rounded-xl bg-off-white p-4">
+                    <h4 className="mb-2 font-heading text-[13px] font-semibold text-dark">Como funciona</h4>
+                    <p className="font-body text-[12.5px] leading-relaxed text-text-mid">
+                      Semelhante a um alinhador dentário, o EA Air avança a mandíbula em milímetros durante o sono, impedindo que a língua e os tecidos moles colapsem sobre as vias aéreas. Resultado: ar passa livremente, o ronco para e a oxigenação se normaliza.
+                    </p>
+                  </div>
+
+                  {/* Beneficios */}
+                  <h4 className="mb-3 font-heading text-[14px] font-semibold text-dark">Por que escolher o EA Air</h4>
+                  <div className="mb-5 space-y-2.5">
+                    {[
+                      { icon: Moon, title: "Sono Profundo e Reparador", desc: "Elimina o ronco e as pausas respiratórias, permitindo que seu corpo atinja todas as fases do sono — incluindo o sono profundo essencial para regeneração celular." },
+                      { icon: HeartPulse, title: "Proteção Cardiovascular", desc: "Mantém a oxigenação adequada durante toda a noite, reduzindo a sobrecarga no coração e prevenindo hipertensão, arritmias e risco de infarto." },
+                      { icon: Brain, title: "Clareza Mental e Energia", desc: "Com sono de qualidade, você acorda com disposição real. Mais concentração, memória afiada e humor estável ao longo de todo o dia." },
+                      { icon: Smile, title: "Confortável e Discreto", desc: "Design ergonômico e estético que se adapta à sua arcada. Sem barulho, sem fios, sem máquinas. Confortável desde a primeira noite." },
+                      { icon: Activity, title: "Prático e Portátil", desc: "Diferente do CPAP, não precisa de eletricidade. Cabe na palma da mão — ideal para viagens e uso diário sem complicação." },
+                      { icon: Shield, title: "Acompanhamento Especializado", desc: "Moldado e ajustado por um dentista credenciado em odontologia do sono, garantindo encaixe perfeito e resultado otimizado para o seu caso." },
+                    ].map((b) => (
+                      <div key={b.title} className="flex gap-3.5 rounded-xl border-[1.5px] border-border bg-white p-3.5">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-light">
+                          <b.icon className="h-[18px] w-[18px] text-blue" />
+                        </div>
+                        <div>
+                          <h5 className="mb-0.5 font-heading text-[13px] font-semibold text-dark">{b.title}</h5>
+                          <p className="font-body text-[12px] leading-relaxed text-text-mid">{b.desc}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h5 className="font-heading text-[12.5px] font-semibold text-dark">{b.title}</h5>
-                        <p className="font-body text-[11px] leading-snug text-text-mid">{b.desc}</p>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+
+                  {/* Para quem */}
+                  <div className="mb-5 rounded-xl border-[1.5px] border-blue/15 bg-blue-light p-4">
+                    <h4 className="mb-2 font-heading text-[13px] font-semibold text-dark">Para quem é indicado</h4>
+                    <p className="font-body text-[12.5px] leading-relaxed text-text-mid">
+                      Adultos com ronco primário e apneia obstrutiva leve a moderada, ou como alternativa ao CPAP quando o paciente não se adaptou. A indicação é sempre feita por um profissional credenciado após avaliação clínica.
+                    </p>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Espaco */}
-              <div className="flex-1" />
-
-              {/* Indicacao + CTA embaixo */}
-              <div className="mx-auto w-full max-w-[480px]">
-                <div className="mb-4 rounded-xl border-[1.5px] border-blue/15 bg-blue-light px-3.5 py-3">
-                  <p className="font-body text-[11px] leading-snug text-text-mid">
-                    <span className="font-heading font-semibold text-dark">Indicado para</span> adultos com ronco e apneia leve a moderada, ou como alternativa ao CPAP. Sempre com acompanhamento de um profissional credenciado.
-                  </p>
-                </div>
+            {/* CTA fixo */}
+            <div className="shrink-0 border-t border-slate-100 bg-white px-5 py-4">
+              <div className="mx-auto max-w-[400px]">
                 <Button variant="primary" onClick={() => setPhase("credentialed")}>
                   Encontrar profissional
                   <ArrowRight className="h-4 w-4" />
