@@ -243,7 +243,7 @@ export function Quiz({ onClose }: QuizProps) {
                   <div className="mb-3 rounded-xl p-3" style={{ backgroundColor: `${result.riskColor}08`, borderLeft: `3px solid ${result.riskColor}` }}>
                     <div className="flex items-start gap-2">
                       <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: result.riskColor }} />
-                      <p className="font-body text-[12px] font-medium leading-snug text-dark">
+                      <p className="font-body text-[12px] font-medium leading-tight text-dark">
                         {report.alert}
                       </p>
                     </div>
@@ -256,7 +256,7 @@ export function Quiz({ onClose }: QuizProps) {
                   <div className="mb-3 space-y-2">
                     {report.impacts.map((impact, i) => (
                       <div key={i} className="rounded-lg border-[1.5px] border-border bg-off-white px-3 py-2">
-                        <p className="font-body text-[11.5px] leading-snug text-text-mid">
+                        <p className="font-body text-[11.5px] leading-tight text-text-mid">
                           <span className="font-heading font-semibold text-dark">{impact.bold}</span>
                           {impact.text}
                         </p>
@@ -270,7 +270,7 @@ export function Quiz({ onClose }: QuizProps) {
                       <ShieldCheck className="h-3.5 w-3.5 text-blue" />
                       Recomendação
                     </div>
-                    <p className="font-body text-[12px] leading-snug text-text-mid">
+                    <p className="font-body text-[12px] leading-tight text-text-mid">
                       {report.recommendation}
                     </p>
                   </div>
@@ -313,7 +313,7 @@ export function Quiz({ onClose }: QuizProps) {
                   {/* Como funciona */}
                   <div className="mb-4 rounded-xl bg-off-white p-3">
                     <h4 className="mb-1 font-heading text-[12px] font-semibold text-dark">Como funciona</h4>
-                    <p className="font-body text-[11.5px] leading-snug text-text-mid">
+                    <p className="font-body text-[11.5px] leading-tight text-text-mid">
                       Avança a mandíbula milimetricamente, mantendo as vias aéreas abertas. O ronco para e a oxigenação se normaliza.
                     </p>
                   </div>
@@ -342,7 +342,7 @@ export function Quiz({ onClose }: QuizProps) {
 
                   {/* Indicacao */}
                   <div className="mb-3 rounded-xl border-[1.5px] border-blue/15 bg-blue-light p-3">
-                    <p className="font-body text-[11.5px] leading-snug text-text-mid">
+                    <p className="font-body text-[11.5px] leading-tight text-text-mid">
                       <span className="font-heading font-semibold text-dark">Indicado para</span> adultos com ronco e apneia leve a moderada, ou como alternativa ao CPAP.
                     </p>
                   </div>
