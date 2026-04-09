@@ -17,60 +17,69 @@ export function QuizResult({ result, onContinue }: QuizResultProps) {
   const Icon = riskIcons[result.riskLevel];
 
   return (
-    <div className="flex flex-1 flex-col items-center px-5 py-8 text-center" aria-live="polite">
-      <div className={cn("relative mb-4 flex h-16 w-16 items-center justify-center rounded-full", riskIconBg[result.riskLevel])}>
-        <Icon className="h-[26px] w-[26px]" style={{ color: result.riskColor }} />
-        <span
-          className="absolute -inset-1.5 animate-[ring-pulse_2s_ease-in-out_infinite] rounded-full border-2"
-          style={{ borderColor: `${result.riskColor}20` }}
-        />
-      </div>
-
-      <p className="mb-1.5 font-heading text-[11px] font-semibold uppercase tracking-[2px]" style={{ color: result.riskColor }}>
-        {result.riskLabel}
-      </p>
-
-      <h2 className="mb-2 font-heading text-[22px] font-semibold text-dark tracking-tight">
-        {result.riskTitle}
-      </h2>
-
-      <p className="mb-5 max-w-[260px] font-body text-[13px] leading-relaxed text-text-mid">
-        Seus indicadores sugerem que uma avaliação profissional é recomendada para entender melhor sua situação.
-      </p>
-
-      <div className="mb-6 w-full max-w-[240px]">
-        <div className="mb-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
-          <div
-            className="h-full rounded-full bg-gradient-to-r from-yellow-400 via-orange to-red transition-[width] duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]"
-            style={{ width: `${result.percentage}%` }}
+    <div className="flex flex-1 flex-col px-5 py-6" aria-live="polite">
+      {/* Copy em cima */}
+      <div className="text-center">
+        <div className={cn("relative mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full", riskIconBg[result.riskLevel])}>
+          <Icon className="h-[26px] w-[26px]" style={{ color: result.riskColor }} />
+          <span
+            className="absolute -inset-1.5 animate-[ring-pulse_2s_ease-in-out_infinite] rounded-full border-2"
+            style={{ borderColor: `${result.riskColor}20` }}
           />
         </div>
-        <div className="flex justify-between font-body text-[9px] font-medium uppercase tracking-[1px]">
-          <span className="text-green">Baixo</span>
-          <span className="text-red">Alto</span>
-        </div>
-      </div>
 
-      <div className="mb-4 w-full rounded-[14px] border-[1.5px] border-dashed border-slate-300 bg-off-white p-4 text-left">
-        <div className="mb-2.5 flex items-center gap-[7px] font-heading text-[13px] font-semibold text-dark">
-          <Lock className="h-3.5 w-3.5 text-text-light" />
-          Seu relatório completo inclui
-        </div>
-        {["Análise detalhada dos seus fatores de risco", "Recomendações personalizadas", "Dentista credenciado perto de você"].map((item) => (
-          <div key={item} className="flex items-center gap-2 py-1 font-body text-xs text-text-mid">
-            <span className="h-1 w-1 shrink-0 rounded-full bg-slate-300" />
-            {item}
+        <p className="mb-1.5 font-heading text-[11px] font-semibold uppercase tracking-[2px]" style={{ color: result.riskColor }}>
+          {result.riskLabel}
+        </p>
+
+        <h2 className="mb-2 font-heading text-[22px] font-semibold text-dark tracking-tight">
+          {result.riskTitle}
+        </h2>
+
+        <p className="mx-auto mb-5 max-w-[260px] font-body text-[13px] leading-relaxed text-text-mid">
+          Seus indicadores sugerem que uma avaliação profissional é recomendada para entender melhor sua situação.
+        </p>
+
+        <div className="mx-auto mb-4 w-full max-w-[240px]">
+          <div className="mb-2 h-1.5 overflow-hidden rounded-full bg-slate-100">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-yellow-400 via-orange to-red transition-[width] duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]"
+              style={{ width: `${result.percentage}%` }}
+            />
           </div>
-        ))}
+          <div className="flex justify-between font-body text-[9px] font-medium uppercase tracking-[1px]">
+            <span className="text-green">Baixo</span>
+            <span className="text-red">Alto</span>
+          </div>
+        </div>
       </div>
 
-      <Button variant="blue" onClick={onContinue} className="w-full">
-        Ver relatório completo
-      </Button>
+      {/* Espaco branco entre */}
+      <div className="flex-1" />
 
-      <p className="mt-2.5 font-body text-[10px] text-text-light">
-        Seus dados estão seguros e protegidos
-      </p>
+      {/* Acoes embaixo */}
+      <div>
+        <div className="mb-4 w-full rounded-[14px] border-[1.5px] border-dashed border-slate-300 bg-off-white p-4 text-left">
+          <div className="mb-2.5 flex items-center gap-[7px] font-heading text-[13px] font-semibold text-dark">
+            <Lock className="h-3.5 w-3.5 text-text-light" />
+            Seu relatório completo inclui
+          </div>
+          {["Análise detalhada dos seus fatores de risco", "Recomendações personalizadas", "Dentista credenciado perto de você"].map((item) => (
+            <div key={item} className="flex items-center gap-2 py-1 font-body text-xs text-text-mid">
+              <span className="h-1 w-1 shrink-0 rounded-full bg-slate-300" />
+              {item}
+            </div>
+          ))}
+        </div>
+
+        <Button variant="blue" onClick={onContinue} className="w-full">
+          Ver relatório completo
+        </Button>
+
+        <p className="mt-2.5 text-center font-body text-[10px] text-text-light">
+          Seus dados estão seguros e protegidos
+        </p>
+      </div>
     </div>
   );
 }

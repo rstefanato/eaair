@@ -57,8 +57,9 @@ export function LeadCapture({ quizResult, onComplete }: LeadCaptureProps) {
   };
 
   return (
-    <section className="bg-white px-5 py-10">
-      <div className="mx-auto max-w-[400px]">
+    <section className="flex flex-1 flex-col bg-white px-5 py-6">
+      <div className="mx-auto flex w-full max-w-[400px] flex-1 flex-col">
+        {/* Step indicator */}
         <div className="mb-5 flex gap-2">
           <span className="h-[3px] flex-1 rounded-full bg-blue" />
           <span className={`h-[3px] flex-1 rounded-full ${step === 2 ? "bg-blue" : "bg-border"}`} />
@@ -66,27 +67,47 @@ export function LeadCapture({ quizResult, onComplete }: LeadCaptureProps) {
 
         {step === 1 ? (
           <>
-            <h2 className="mb-1 font-heading text-base font-semibold text-dark">Quase lá</h2>
-            <p className="mb-5 font-body text-xs text-text-mid">Informe seus dados para acessar o relatório e encontrar um especialista</p>
-            <div className="space-y-3.5">
-              <Input label="Nome" type="text" placeholder="Seu nome completo" autoComplete="name" value={nome} onChange={(e) => setNome(e.target.value)} />
-              <Input label="E-mail" type="email" placeholder="seu@email.com" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            {/* Copy em cima */}
+            <div>
+              <h2 className="mb-1 font-heading text-base font-semibold text-dark">Quase lá</h2>
+              <p className="font-body text-xs text-text-mid">Informe seus dados para acessar o relatório e encontrar um especialista</p>
             </div>
-            <div className="mt-5">
-              <Button variant="blue" onClick={handleStep1} disabled={!isStep1Valid}>Continuar</Button>
+
+            {/* Espaco branco entre */}
+            <div className="flex-1" />
+
+            {/* Inputs e botao embaixo */}
+            <div>
+              <div className="space-y-3.5">
+                <Input label="Nome" type="text" placeholder="Seu nome completo" autoComplete="name" value={nome} onChange={(e) => setNome(e.target.value)} />
+                <Input label="E-mail" type="email" placeholder="seu@email.com" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </div>
+              <div className="mt-5">
+                <Button variant="blue" onClick={handleStep1} disabled={!isStep1Valid}>Continuar</Button>
+              </div>
+              <p className="mt-2.5 text-center font-body text-[10px] text-text-light">Seus dados estão seguros. Não enviamos spam.</p>
             </div>
-            <p className="mt-2.5 text-center font-body text-[10px] text-text-light">Seus dados estão seguros. Não enviamos spam.</p>
           </>
         ) : (
           <>
-            <h2 className="mb-1 font-heading text-base font-semibold text-dark">Encontre um especialista</h2>
-            <p className="mb-5 font-body text-xs text-text-mid">Precisamos da sua localização para mostrar dentistas credenciados próximos</p>
-            <div className="space-y-3.5">
-              <Input label="CEP" type="text" inputMode="numeric" placeholder="00000-000" autoComplete="postal-code" value={cep} onChange={(e) => setCep(formatCep(e.target.value))} />
-              <Input label="Telefone" type="tel" inputMode="numeric" placeholder="(00) 00000-0000" autoComplete="tel" value={telefone} onChange={(e) => setTelefone(formatPhone(e.target.value))} />
+            {/* Copy em cima */}
+            <div>
+              <h2 className="mb-1 font-heading text-base font-semibold text-dark">Encontre um especialista</h2>
+              <p className="font-body text-xs text-text-mid">Precisamos da sua localização para mostrar dentistas credenciados próximos</p>
             </div>
-            <div className="mt-5">
-              <Button variant="blue" onClick={handleStep2} disabled={!isStep2Valid || loading}>{loading ? "Enviando..." : "Ver credenciados próximos"}</Button>
+
+            {/* Espaco branco entre */}
+            <div className="flex-1" />
+
+            {/* Inputs e botao embaixo */}
+            <div>
+              <div className="space-y-3.5">
+                <Input label="CEP" type="text" inputMode="numeric" placeholder="00000-000" autoComplete="postal-code" value={cep} onChange={(e) => setCep(formatCep(e.target.value))} />
+                <Input label="Telefone" type="tel" inputMode="numeric" placeholder="(00) 00000-0000" autoComplete="tel" value={telefone} onChange={(e) => setTelefone(formatPhone(e.target.value))} />
+              </div>
+              <div className="mt-5">
+                <Button variant="blue" onClick={handleStep2} disabled={!isStep2Valid || loading}>{loading ? "Enviando..." : "Ver credenciados próximos"}</Button>
+              </div>
             </div>
           </>
         )}
