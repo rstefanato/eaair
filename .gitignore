@@ -38,3 +38,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Brainstorm mockups
+.superpowers/
+
+# Lead data (sensitive)
+data/leads.json
