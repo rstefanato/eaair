@@ -19,7 +19,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "EA Air — Teste de Apneia do Sono",
   description:
-    "Descubra em 2 minutos se voce tem risco de apneia obstrutiva do sono. Teste gratuito baseado no STOP-Bang e encontre um dentista credenciado perto de voce.",
+    "Descubra em 2 minutos se você tem risco de apneia obstrutiva do sono. Teste gratuito baseado no STOP-Bang e encontre um dentista credenciado perto de você.",
 };
 
 export const viewport: Viewport = {

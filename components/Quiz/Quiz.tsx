@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, X } from "lucide-react";
 import { questions, calculateResult, type QuizResult as QuizResultType } from "./quiz-data";
@@ -13,9 +13,10 @@ type QuizPhase = "questions" | "result";
 
 interface QuizProps {
   onComplete: (result: QuizResultType) => void;
+  onClose: () => void;
 }
 
-export function Quiz({ onComplete }: QuizProps) {
+export function Quiz({ onComplete, onClose }: QuizProps) {
   const [phase, setPhase] = useState<QuizPhase>("questions");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -25,6 +26,14 @@ export function Quiz({ onComplete }: QuizProps) {
 
   const currentQuestion = questions[currentIndex];
   const isLastQuestion = currentIndex === questions.length - 1;
+
+  // Lock body scroll when quiz overlay is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   const advance = useCallback(
     (points: number) => {
@@ -70,8 +79,20 @@ export function Quiz({ onComplete }: QuizProps) {
   };
 
   return (
-    <section id="quiz" className="bg-white">
-      <div className="mx-auto max-w-[600px]">
+    <motion.div
+      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/40 backdrop-blur-sm lg:items-center lg:p-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+    >
+      <motion.div
+        className="relative flex min-h-screen w-full flex-col bg-white lg:min-h-0 lg:max-w-[600px] lg:rounded-2xl lg:shadow-2xl"
+        initial={{ y: 40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 40, opacity: 0 }}
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+      >
         {phase === "questions" && (
           <>
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-2.5">
@@ -86,7 +107,11 @@ export function Quiz({ onComplete }: QuizProps) {
               <span className="font-heading text-xs font-medium text-text-light tracking-wide">
                 <b className="font-semibold text-text">{currentIndex + 1}</b> / {questions.length}
               </span>
-              <button className="flex h-[34px] w-[34px] items-center justify-center rounded-[9px] text-text-light cursor-pointer" aria-label="Fechar">
+              <button
+                onClick={onClose}
+                className="flex h-[34px] w-[34px] items-center justify-center rounded-[9px] text-text-light transition-colors hover:text-text cursor-pointer"
+                aria-label="Fechar"
+              >
                 <X className="h-3.5 w-3.5" />
               </button>
             </div>
@@ -118,7 +143,7 @@ export function Quiz({ onComplete }: QuizProps) {
 
             <div className="border-t border-slate-50 px-5 py-3 text-center">
               <p className="font-body text-[11px] text-text-light">
-                Toque em uma opcao para avancar
+                Toque em uma opção para avançar
               </p>
             </div>
           </>
@@ -127,7 +152,7 @@ export function Quiz({ onComplete }: QuizProps) {
         {phase === "result" && result && (
           <QuizResult result={result} onContinue={handleResultContinue} />
         )}
-      </div>
-    </section>
+      </motion.div>
+    </motion.div>
   );
 }

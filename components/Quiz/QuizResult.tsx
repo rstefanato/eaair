@@ -35,7 +35,7 @@ export function QuizResult({ result, onContinue }: QuizResultProps) {
       </h2>
 
       <p className="mb-5 max-w-[260px] font-body text-[13px] leading-relaxed text-text-mid">
-        Seus indicadores sugerem que uma avaliacao profissional e recomendada para entender melhor sua situacao.
+        Seus indicadores sugerem que uma avaliação profissional é recomendada para entender melhor sua situação.
       </p>
 
       <div className="mb-6 w-full max-w-[240px]">
@@ -54,9 +54,9 @@ export function QuizResult({ result, onContinue }: QuizResultProps) {
       <div className="mb-4 w-full rounded-[14px] border-[1.5px] border-dashed border-slate-300 bg-off-white p-4 text-left">
         <div className="mb-2.5 flex items-center gap-[7px] font-heading text-[13px] font-semibold text-dark">
           <Lock className="h-3.5 w-3.5 text-text-light" />
-          Seu relatorio completo inclui
+          Seu relatório completo inclui
         </div>
-        {["Analise detalhada dos seus fatores de risco", "Recomendacoes personalizadas", "Dentista credenciado perto de voce"].map((item) => (
+        {["Análise detalhada dos seus fatores de risco", "Recomendações personalizadas", "Dentista credenciado perto de você"].map((item) => (
           <div key={item} className="flex items-center gap-2 py-1 font-body text-xs text-text-mid">
             <span className="h-1 w-1 shrink-0 rounded-full bg-slate-300" />
             {item}
@@ -65,11 +65,11 @@ export function QuizResult({ result, onContinue }: QuizResultProps) {
       </div>
 
       <Button variant="blue" onClick={onContinue} className="w-full">
-        Ver relatorio completo
+        Ver relatório completo
       </Button>
 
       <p className="mt-2.5 font-body text-[10px] text-text-light">
-        Seus dados estao seguros e protegidos
+        Seus dados estão seguros e protegidos
       </p>
     </div>
   );

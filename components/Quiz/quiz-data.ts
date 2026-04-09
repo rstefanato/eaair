@@ -45,37 +45,37 @@ export const questions: Question[] = [
     id: "ronco",
     category: "Ronco",
     categoryIcon: "volume-2",
-    question: "Voce ronca ou ja disseram que voce ronca?",
-    hint: "Considere o que parceiro(a), familiares ou amigos ja comentaram.",
+    question: "Você ronca ou já disseram que você ronca?",
+    hint: "Considere o que parceiro(a), familiares ou amigos já comentaram.",
     options: [
-      { label: "Sim", description: "Ronco com frequencia", points: 2 },
-      { label: "Nao", description: "Nunca roncei ou me disseram", points: 0 },
-      { label: "Nao sei", description: "Nunca me falaram sobre isso", points: 1 },
+      { label: "Sim", description: "Ronco com frequência", points: 2 },
+      { label: "Não", description: "Nunca roncei ou me disseram", points: 0 },
+      { label: "Não sei", description: "Nunca me falaram sobre isso", points: 1 },
     ],
   },
   {
     type: "radio",
     id: "observacao",
-    category: "Observacao",
+    category: "Observação",
     categoryIcon: "eye",
-    question: "Alguem ja percebeu que voce para de respirar ou engasga enquanto dorme?",
+    question: "Alguém já percebeu que você para de respirar ou engasga enquanto dorme?",
     hint: "Parceiro(a), familiar ou amigo que tenha dormido no mesmo ambiente.",
     options: [
-      { label: "Sim, ja me disseram", description: "Alguem observou paradas ou engasgos", points: 2 },
-      { label: "Nao", description: "Ja perguntei e ninguem notou", points: 0 },
-      { label: "Nao sei", description: "Nunca perguntei ou durmo sozinho(a)", points: 1 },
+      { label: "Sim, já me disseram", description: "Alguém observou paradas ou engasgos", points: 2 },
+      { label: "Não", description: "Já perguntei e ninguém notou", points: 0 },
+      { label: "Não sei", description: "Nunca perguntei ou durmo sozinho(a)", points: 1 },
     ],
   },
   {
     type: "radio",
     id: "cansaco",
-    category: "Cansaco",
+    category: "Cansaço",
     categoryIcon: "battery-low",
-    question: "Voce se sente cansado(a) ou com sono durante o dia, mesmo dormindo a noite toda?",
-    hint: "Pense nos ultimos 30 dias.",
+    question: "Você se sente cansado(a) ou com sono durante o dia, mesmo dormindo a noite toda?",
+    hint: "Pense nos últimos 30 dias.",
     options: [
       { label: "Sempre", description: "Praticamente todos os dias", points: 2 },
-      { label: "As vezes", description: "Alguns dias na semana", points: 1 },
+      { label: "Às vezes", description: "Alguns dias na semana", points: 1 },
       { label: "Raramente", description: "Quase nunca me sinto assim", points: 0 },
     ],
   },
@@ -85,32 +85,32 @@ export const questions: Question[] = [
     category: "IMC",
     categoryIcon: "scale",
     question: "Qual seu peso e altura?",
-    hint: "Usamos esses dados para avaliar um dos fatores de risco. Nenhum calculo sera exibido.",
+    hint: "Usamos esses dados para avaliar um dos fatores de risco. Nenhum cálculo será exibido.",
   },
   {
     type: "radio",
     id: "sintomas",
     category: "Sintomas",
     categoryIcon: "sun",
-    question: "Com que frequencia voce acorda com dor de cabeca ou boca seca?",
-    hint: "Sintomas ao acordar pela manha.",
+    question: "Com que frequência você acorda com dor de cabeça ou boca seca?",
+    hint: "Sintomas ao acordar pela manhã.",
     options: [
       { label: "Frequentemente", description: "3 ou mais vezes por semana", points: 2 },
-      { label: "As vezes", description: "1-2 vezes por semana", points: 1 },
-      { label: "Nunca", description: "Nao tenho esses sintomas", points: 0 },
+      { label: "Às vezes", description: "1-2 vezes por semana", points: 1 },
+      { label: "Nunca", description: "Não tenho esses sintomas", points: 0 },
     ],
   },
   {
     type: "radio",
     id: "pressao",
-    category: "Pressao",
+    category: "Pressão",
     categoryIcon: "heart-pulse",
-    question: "Voce tem ou esta tratando pressao alta?",
-    hint: "Hipertensao diagnosticada ou uso de medicacao.",
+    question: "Você tem ou está tratando pressão alta?",
+    hint: "Hipertensão diagnosticada ou uso de medicação.",
     options: [
-      { label: "Sim", description: "Tenho diagnostico ou tomo medicacao", points: 2 },
-      { label: "Nao", description: "Minha pressao e normal", points: 0 },
-      { label: "Nao sei", description: "Nunca medi ou nao lembro", points: 1 },
+      { label: "Sim", description: "Tenho diagnóstico ou tomo medicação", points: 2 },
+      { label: "Não", description: "Minha pressão é normal", points: 0 },
+      { label: "Não sei", description: "Nunca medi ou não lembro", points: 1 },
     ],
   },
 ];
@@ -137,7 +137,7 @@ export function calculateResult(answers: Record<string, number>): QuizResult {
   if (score <= 3) {
     riskLevel = "low";
     riskLabel = "Risco Baixo";
-    riskTitle = "Boas indicacoes";
+    riskTitle = "Boas indicações";
     riskColor = "#16A34A";
   } else if (score <= 7) {
     riskLevel = "moderate";
@@ -147,7 +147,7 @@ export function calculateResult(answers: Record<string, number>): QuizResult {
   } else {
     riskLevel = "high";
     riskLabel = "Risco Alto";
-    riskTitle = "Atencao aos sinais";
+    riskTitle = "Atenção aos sinais";
     riskColor = "#DC2626";
   }
 

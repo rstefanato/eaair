@@ -6,38 +6,38 @@ import { Moon, AlertTriangle, Activity, HeartPulse, Brain, Zap } from "lucide-re
 const risks = [
   { label: "Infarto", icon: HeartPulse },
   { label: "AVC", icon: Brain },
-  { label: "Hipertensao", icon: Activity },
+  { label: "Hipertensão", icon: Activity },
   { label: "Diabetes", icon: Zap },
-  { label: "Depressao", icon: Moon },
-  { label: "Perda de memoria", icon: AlertTriangle },
+  { label: "Depressão", icon: Moon },
+  { label: "Perda de memória", icon: AlertTriangle },
 ];
 
 const cards = [
   {
     icon: Moon,
-    title: "O que e Apneia?",
+    title: "O que é Apneia?",
     description:
-      "A Apneia Obstrutiva do Sono (AOS) ocorre quando ha interrupcoes na respiracao durante o sono, causando despertares e reducao do oxigenio no sangue.",
+      "A Apneia Obstrutiva do Sono (AOS) ocorre quando há interrupções na respiração durante o sono, causando despertares e redução do oxigênio no sangue.",
   },
   {
     icon: AlertTriangle,
     title: "Sinais de Alerta",
     description:
-      "Ronco alto, cansaco diurno excessivo, dor de cabeca matinal, boca seca ao acordar e dificuldade de concentracao.",
+      "Ronco alto, cansaço diurno excessivo, dor de cabeça matinal, boca seca ao acordar e dificuldade de concentração.",
   },
   {
     icon: Activity,
     title: "Quem tem Risco?",
     description:
-      "Presente em 1 a cada 3 pessoas. Fatores: sobrepeso, circunferencia do pescoco elevada, idade acima de 50 anos e historico familiar.",
+      "Presente em 1 a cada 3 pessoas. Fatores: sobrepeso, circunferência do pescoço elevada, idade acima de 50 anos e histórico familiar.",
   },
 ];
 
-export function Education() {
-  const scrollToQuiz = () => {
-    document.getElementById("quiz")?.scrollIntoView({ behavior: "smooth" });
-  };
+interface EducationProps {
+  onStartQuiz: () => void;
+}
 
+export function Education({ onStartQuiz }: EducationProps) {
   return (
     <section id="educacao" className="bg-off-white px-5 py-16 md:py-24">
       <div className="mx-auto max-w-[1000px]">
@@ -50,7 +50,7 @@ export function Education() {
             Ronco e Apneia Obstrutiva do Sono
           </h2>
           <p className="mx-auto max-w-[480px] font-body text-sm text-text-mid leading-relaxed">
-            O ronco e ruim, mas a apneia impacta diretamente a saude do paciente.
+            O ronco é ruim, mas a apneia impacta diretamente a saúde do paciente.
           </p>
         </div>
 
@@ -89,7 +89,7 @@ export function Education() {
         {/* Risks — circular layout inspired by infographic */}
         <div className="mb-10 rounded-2xl border-[1.5px] border-border bg-white p-5 md:p-8">
           <h3 className="mb-6 font-heading text-[15px] font-semibold text-dark text-center">
-            Problemas associados a Apneia Obstrutiva
+            Problemas associados à Apneia Obstrutiva
           </h3>
           <div className="grid grid-cols-3 gap-4 md:gap-6">
             {risks.map((risk) => (
@@ -107,7 +107,7 @@ export function Education() {
 
         {/* CTA */}
         <div className="mx-auto max-w-[360px]">
-          <Button variant="blue" onClick={scrollToQuiz}>
+          <Button variant="blue" onClick={onStartQuiz}>
             Descubra seu risco agora
           </Button>
         </div>

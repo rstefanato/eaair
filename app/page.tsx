@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { Hero } from "@/components/Hero";
 import { Education } from "@/components/Education";
 import { Quiz } from "@/components/Quiz/Quiz";
@@ -14,11 +15,21 @@ type FlowPhase = "landing" | "post-quiz" | "post-lead";
 
 export default function Home() {
   const [phase, setPhase] = useState<FlowPhase>("landing");
+  const [showQuiz, setShowQuiz] = useState(false);
   const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
   const [userCep, setUserCep] = useState("");
 
+  const handleStartQuiz = () => {
+    setShowQuiz(true);
+  };
+
+  const handleCloseQuiz = () => {
+    setShowQuiz(false);
+  };
+
   const handleQuizComplete = (result: QuizResult) => {
     setQuizResult(result);
+    setShowQuiz(false);
     setPhase("post-quiz");
     setTimeout(() => {
       document.getElementById("lead-capture")?.scrollIntoView({ behavior: "smooth" });
@@ -35,9 +46,14 @@ export default function Home() {
 
   return (
     <main>
-      <Hero />
-      <Education />
-      <Quiz onComplete={handleQuizComplete} />
+      <Hero onStartQuiz={handleStartQuiz} />
+      <Education onStartQuiz={handleStartQuiz} />
+
+      <AnimatePresence>
+        {showQuiz && (
+          <Quiz onComplete={handleQuizComplete} onClose={handleCloseQuiz} />
+        )}
+      </AnimatePresence>
 
       {phase === "post-quiz" && quizResult && (
         <div id="lead-capture">

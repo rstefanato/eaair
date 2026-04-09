@@ -39,7 +39,7 @@ export function QuizBmiQuestion({ onSubmit }: QuizBmiQuestionProps) {
       </h2>
 
       <p className="mb-6 font-body text-[13px] text-text-mid leading-relaxed">
-        Usamos esses dados para avaliar um dos fatores de risco. Nenhum calculo sera exibido.
+        Usamos esses dados para avaliar um dos fatores de risco. Nenhum cálculo será exibido.
       </p>
 
       <div className="flex gap-3">
