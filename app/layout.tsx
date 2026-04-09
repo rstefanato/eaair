@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
+import { PasswordGate } from "@/components/PasswordGate";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -35,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${plusJakarta.variable} ${dmSans.variable}`}>
       <body className="font-body text-text bg-white antialiased">
-        {children}
+        <PasswordGate>{children}</PasswordGate>
       </body>
     </html>
   );
