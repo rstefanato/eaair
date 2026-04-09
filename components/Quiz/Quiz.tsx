@@ -87,7 +87,7 @@ export function Quiz({ onComplete, onClose }: QuizProps) {
       transition={{ duration: 0.25 }}
     >
       <motion.div
-        className="relative flex min-h-screen w-full flex-col bg-white lg:min-h-0 lg:max-w-[600px] lg:rounded-2xl lg:shadow-2xl"
+        className="relative flex min-h-screen w-full flex-col bg-white lg:min-h-[600px] lg:max-h-[85vh] lg:max-w-[600px] lg:rounded-2xl lg:shadow-2xl lg:overflow-y-auto"
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 40, opacity: 0 }}
@@ -118,28 +118,30 @@ export function Quiz({ onComplete, onClose }: QuizProps) {
 
             <QuizProgress current={currentIndex + 1} total={questions.length} />
 
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={currentIndex}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-                className="flex min-h-[480px] flex-col"
-              >
-                {currentQuestion.type === "bmi" ? (
-                  <QuizBmiQuestion onSubmit={advance} />
-                ) : (
-                  <QuizQuestion
-                    question={currentQuestion}
-                    selectedIndex={selectedOptionIndex}
-                    onSelect={handleRadioSelect}
-                  />
-                )}
-              </motion.div>
-            </AnimatePresence>
+            <div className="flex flex-1 flex-col">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentIndex}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+                  className="flex flex-1 flex-col"
+                >
+                  {currentQuestion.type === "bmi" ? (
+                    <QuizBmiQuestion onSubmit={advance} />
+                  ) : (
+                    <QuizQuestion
+                      question={currentQuestion}
+                      selectedIndex={selectedOptionIndex}
+                      onSelect={handleRadioSelect}
+                    />
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             <div className="border-t border-slate-50 px-5 py-3 text-center">
               <p className="font-body text-[11px] text-text-light">
