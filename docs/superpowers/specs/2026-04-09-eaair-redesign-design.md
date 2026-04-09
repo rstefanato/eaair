@@ -90,9 +90,18 @@ Hierarquia:
 
 ### 4.2 Mini-educativo
 
-- 3-4 cards sobre apneia: O que e, Sintomas, Riscos
-- Dado de impacto: "1 em cada 3 pessoas"
-- Lista de problemas associados (hipertensao, AVC, diabetes, etc.)
+- Dados de impacto em destaque:
+  - "40% das pessoas roncam"
+  - "33% das pessoas apresentam apneia"
+  - Mensagem: "O ronco e ruim, mas a apneia impacta diretamente a saude"
+- Problemas associados a Apneia Obstrutiva (baseado no infografico `public/images/problemas-apneia.jpeg`):
+  - Infarto
+  - AVC
+  - Hipertensao
+  - Diabetes
+  - Depressao
+  - Perda de memoria
+- Layout: icones em circulo ao redor de ilustracao central (similar ao infografico original)
 - CTA: "Descubra seu risco agora"
 - Background: off-white `#F8FAFC`
 

@@ -496,12 +496,12 @@ import { Button } from "@/components/ui/Button";
 import { Moon, AlertTriangle, Activity, HeartPulse, Brain, Zap } from "lucide-react";
 
 const risks = [
-  "Hipertensao Arterial",
-  "Doencas Cardiovasculares",
-  "AVC (Acidente Vascular Cerebral)",
-  "Diabetes Tipo 2",
-  "Disturbios do Humor",
-  "Risco de Acidentes",
+  { label: "Infarto", icon: HeartPulse },
+  { label: "AVC", icon: Brain },
+  { label: "Hipertensao", icon: Activity },
+  { label: "Diabetes", icon: Zap },
+  { label: "Depressao", icon: Moon },
+  { label: "Perda de memoria", icon: AlertTriangle },
 ];
 
 const cards = [
@@ -542,9 +542,20 @@ export function Education() {
             Ronco e Apneia Obstrutiva do Sono
           </h2>
           <p className="mx-auto max-w-[480px] font-body text-sm text-text-mid leading-relaxed">
-            O ronco pode ser mais do que um incomodo: pode ser um sinal de um
-            disturbio que compromete sua saude e qualidade de vida.
+            O ronco e ruim, mas a apneia impacta diretamente a saude do paciente.
           </p>
+        </div>
+
+        {/* Impact stats */}
+        <div className="mb-10 grid grid-cols-2 gap-4 md:gap-6">
+          <div className="rounded-2xl border-[1.5px] border-border bg-white p-5 text-center">
+            <div className="mb-1 font-heading text-[28px] font-semibold text-blue tracking-tight">40%</div>
+            <p className="font-body text-xs text-text-mid">das pessoas roncam</p>
+          </div>
+          <div className="rounded-2xl border-[1.5px] border-border bg-white p-5 text-center">
+            <div className="mb-1 font-heading text-[28px] font-semibold text-red tracking-tight">33%</div>
+            <p className="font-body text-xs text-text-mid">apresentam apneia</p>
+          </div>
         </div>
 
         {/* Info cards */}
@@ -567,19 +578,19 @@ export function Education() {
           ))}
         </div>
 
-        {/* Risks */}
+        {/* Risks — circular layout inspired by infographic */}
         <div className="mb-10 rounded-2xl border-[1.5px] border-border bg-white p-5 md:p-8">
-          <h3 className="mb-4 font-heading text-[15px] font-semibold text-dark md:text-center">
-            Problemas associados a Apneia
+          <h3 className="mb-6 font-heading text-[15px] font-semibold text-dark text-center">
+            Problemas associados a Apneia Obstrutiva
           </h3>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-2 md:grid-cols-3">
-            {risks.map((risk, i) => (
-              <div key={risk} className="flex items-center gap-2.5 py-1.5">
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-red-bg font-heading text-[10px] font-semibold text-red">
-                  {i + 1}
-                </span>
-                <span className="font-body text-[12.5px] text-text-mid">
-                  {risk}
+          <div className="grid grid-cols-3 gap-4 md:gap-6">
+            {risks.map((risk) => (
+              <div key={risk.label} className="flex flex-col items-center gap-2 text-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-blue/15 bg-blue-light">
+                  <risk.icon className="h-5 w-5 text-blue" />
+                </div>
+                <span className="font-body text-[11px] font-medium text-text-mid leading-tight">
+                  {risk.label}
                 </span>
               </div>
             ))}
