@@ -55,9 +55,9 @@ export function Hero({ onStartQuiz }: HeroProps) {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex min-h-screen flex-col px-5 pb-6 pt-14 md:pt-20 lg:items-center lg:justify-center lg:px-12 lg:pt-0 lg:pb-0">
+      <div className="relative z-10 mx-auto flex min-h-screen flex-col justify-end px-5 pb-6 pt-14 md:pt-20 lg:items-center lg:justify-center lg:px-12 lg:pt-0 lg:pb-0">
         {/* Logo */}
-        <motion.div className="mb-8 lg:mb-10" {...fadeUp(0.1)}>
+        <motion.div className="mb-5 lg:mb-10" {...fadeUp(0.1)}>
           <Image
             src="/images/ea-logo.png"
             alt="EA Esthetic Aligner"
@@ -103,7 +103,7 @@ export function Hero({ onStartQuiz }: HeroProps) {
 
         {/* CTAs */}
         <motion.div
-          className="mt-auto flex w-full flex-col gap-2.5 md:mt-0 lg:mt-0 lg:flex-row lg:justify-center lg:gap-4 lg:max-w-[520px] lg:mx-auto"
+          className="flex w-full flex-col gap-2.5 lg:flex-row lg:justify-center lg:gap-4 lg:max-w-[520px] lg:mx-auto"
           {...fadeUp(0.7)}
         >
           <Button
