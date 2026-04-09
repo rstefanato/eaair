@@ -8,11 +8,12 @@ import { QuizProgress } from "./QuizProgress";
 import { QuizQuestion } from "./QuizQuestion";
 import { QuizBmiQuestion } from "./QuizBmiQuestion";
 import { QuizResult } from "./QuizResult";
+import { LeadCapture } from "@/components/LeadCapture";
 
-type QuizPhase = "questions" | "result";
+type QuizPhase = "questions" | "result" | "lead-capture";
 
 interface QuizProps {
-  onComplete: (result: QuizResultType) => void;
+  onComplete: (result: QuizResultType, cep: string) => void;
   onClose: () => void;
 }
 
@@ -27,7 +28,6 @@ export function Quiz({ onComplete, onClose }: QuizProps) {
   const currentQuestion = questions[currentIndex];
   const isLastQuestion = currentIndex === questions.length - 1;
 
-  // Lock body scroll when quiz overlay is open
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -69,7 +69,11 @@ export function Quiz({ onComplete, onClose }: QuizProps) {
   };
 
   const handleResultContinue = () => {
-    if (result) onComplete(result);
+    setPhase("lead-capture");
+  };
+
+  const handleLeadComplete = (cep: string) => {
+    if (result) onComplete(result, cep);
   };
 
   const slideVariants = {
@@ -93,6 +97,7 @@ export function Quiz({ onComplete, onClose }: QuizProps) {
         exit={{ y: 40, opacity: 0 }}
         transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
       >
+        {/* ===== FASE: PERGUNTAS ===== */}
         {phase === "questions" && (
           <>
             <div className="flex items-center justify-between border-b border-slate-100 px-5 py-2.5">
@@ -151,8 +156,38 @@ export function Quiz({ onComplete, onClose }: QuizProps) {
           </>
         )}
 
+        {/* ===== FASE: RESULTADO PARCIAL ===== */}
         {phase === "result" && result && (
-          <QuizResult result={result} onContinue={handleResultContinue} />
+          <div className="flex flex-1 flex-col">
+            {/* Topbar com X */}
+            <div className="flex items-center justify-end border-b border-slate-100 px-5 py-2.5">
+              <button
+                onClick={onClose}
+                className="flex h-[34px] w-[34px] items-center justify-center rounded-[9px] text-text-light transition-colors hover:text-text cursor-pointer"
+                aria-label="Fechar"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+            <QuizResult result={result} onContinue={handleResultContinue} />
+          </div>
+        )}
+
+        {/* ===== FASE: CAPTURA DE LEAD ===== */}
+        {phase === "lead-capture" && result && (
+          <div className="flex flex-1 flex-col">
+            {/* Topbar com X */}
+            <div className="flex items-center justify-end border-b border-slate-100 px-5 py-2.5">
+              <button
+                onClick={onClose}
+                className="flex h-[34px] w-[34px] items-center justify-center rounded-[9px] text-text-light transition-colors hover:text-text cursor-pointer"
+                aria-label="Fechar"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            </div>
+            <LeadCapture quizResult={result} onComplete={handleLeadComplete} />
+          </div>
         )}
       </motion.div>
     </motion.div>
