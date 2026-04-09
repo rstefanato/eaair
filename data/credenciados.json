@@ -1,0 +1,7 @@
+[
+  {"nome":"Dr. Ricardo Almeida","especialidade":"Odontologia do Sono","endereco":"Av. Paulista, 1578 - Sala 302, Bela Vista","cidade":"Sao Paulo","estado":"SP","telefone":"1133456789","cep_prefixo":"01"},
+  {"nome":"Dra. Ana Martins","especialidade":"Odontologia do Sono","endereco":"R. Augusta, 2203 - Sala 12, Jardins","cidade":"Sao Paulo","estado":"SP","telefone":"1134567890","cep_prefixo":"01"},
+  {"nome":"Dr. Carlos Souza","especialidade":"Odontologia do Sono","endereco":"Av. Brasil, 500 - Sala 8, Centro","cidade":"Rio de Janeiro","estado":"RJ","telefone":"2134567890","cep_prefixo":"20"},
+  {"nome":"Dra. Mariana Costa","especialidade":"Odontologia do Sono","endereco":"R. XV de Novembro, 300 - Sala 5","cidade":"Curitiba","estado":"PR","telefone":"4134567890","cep_prefixo":"80"},
+  {"nome":"Dr. Fernando Lima","especialidade":"Odontologia do Sono","endereco":"Av. Independencia, 1200 - Sala 45","cidade":"Porto Alegre","estado":"RS","telefone":"5134567890","cep_prefixo":"90"}
+]
