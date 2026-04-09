@@ -103,16 +103,19 @@ Hierarquia:
 | # | Categoria | Pergunta | Opcoes |
 |---|-----------|----------|--------|
 | 1 | Ronco | "Voce ronca ou ja disseram que voce ronca?" | Sim / Nao / Nao sei |
-| 2 | Cansaco | "Voce se sente cansado(a) ou com sono durante o dia, mesmo dormindo a noite toda?" | Sempre / As vezes / Raramente |
-| 3 | Observacao | "Alguem ja percebeu que voce para de respirar ou engasga enquanto dorme?" | Sim / Nao / Nao sei |
-| 4 | Pressao | "Voce tem ou esta tratando pressao alta?" | Sim / Nao / Nao sei |
-| 5 | Peso | "Como voce descreveria seu peso atual?" | Acima do ideal / No peso ideal / Abaixo do ideal |
-| 6 | Sintomas | "Com que frequencia voce acorda com dor de cabeca ou boca seca?" | Frequentemente / As vezes / Nunca |
+| 2 | Observacao | "Alguem ja percebeu que voce para de respirar ou engasga enquanto dorme?" | Sim / Nao / Nao sei |
+| 3 | Cansaco | "Voce se sente cansado(a) ou com sono durante o dia, mesmo dormindo a noite toda?" | Sempre / As vezes / Raramente |
+| 4 | IMC | "Qual seu peso e altura?" | Campos: peso (kg) + altura (cm). IMC calculado internamente (nao exibido ao usuario). IMC >= 28 = risco elevado |
+| 5 | Sintomas | "Com que frequencia voce acorda com dor de cabeca ou boca seca?" | Frequentemente / As vezes / Nunca |
+| 6 | Pressao | "Voce tem ou esta tratando pressao alta?" | Sim / Nao / Nao sei |
 
 **Pontuacao:**
-- Resposta positiva (Sim, Sempre, Frequentemente, Acima do ideal) = 2 pontos
+- Resposta positiva (Sim, Sempre, Frequentemente) = 2 pontos
 - Resposta intermediaria (As vezes, Nao sei) = 1 ponto
-- Resposta negativa (Nao, Raramente, Nunca, No/Abaixo) = 0 pontos
+- Resposta negativa (Nao, Raramente, Nunca) = 0 pontos
+- IMC (pergunta 4): IMC >= 28 = 2 pontos, IMC 25-27.9 = 1 ponto, IMC < 25 = 0 pontos
+  - Formula: peso (kg) / altura (m)²
+  - Threshold 28+ indica sobrepeso com risco elevado para AOS
 - Score maximo: 12 pontos
 - 0-3 = Risco BAIXO (verde `#16A34A`)
 - 4-7 = Risco MODERADO (laranja `#F97316`)
