@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
@@ -7,6 +8,12 @@ import Image from "next/image";
 interface HeroProps {
   onStartQuiz: () => void;
 }
+
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 28 } as const,
+  animate: { opacity: 1, y: 0 } as const,
+  transition: { duration: 0.7, delay, ease: "easeOut" as const },
+});
 
 export function Hero({ onStartQuiz }: HeroProps) {
   const scrollToEducation = () => {
@@ -49,8 +56,8 @@ export function Hero({ onStartQuiz }: HeroProps) {
 
       {/* Content */}
       <div className="relative z-10 mx-auto flex min-h-screen flex-col px-5 pb-6 pt-14 md:pt-20 lg:items-center lg:justify-center lg:px-12 lg:pt-0 lg:pb-0">
-        {/* Logo — sem filtro, original com fundo transparente */}
-        <div className="mb-8 lg:mb-10">
+        {/* Logo */}
+        <motion.div className="mb-8 lg:mb-10" {...fadeUp(0.1)}>
           <Image
             src="/images/ea-logo.png"
             alt="EA Esthetic Aligner"
@@ -59,34 +66,46 @@ export function Hero({ onStartQuiz }: HeroProps) {
             className="drop-shadow-[0_0_12px_rgba(255,255,255,0.15)] lg:w-[200px] lg:mx-auto"
             priority
           />
-        </div>
+        </motion.div>
 
         {/* Badge */}
-        <div className="mb-5 flex items-center gap-[7px] self-start rounded-full border border-white/[0.08] bg-white/[0.06] px-3.5 py-[7px] backdrop-blur-xl lg:self-center lg:mb-8 lg:px-5 lg:py-2">
+        <motion.div
+          className="mb-5 flex items-center gap-[7px] self-start rounded-full border border-white/[0.08] bg-white/[0.06] px-3.5 py-[7px] backdrop-blur-xl lg:self-center lg:mb-8 lg:px-5 lg:py-2"
+          {...fadeUp(0.25)}
+        >
           <span className="h-1.5 w-1.5 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.4)] animate-pulse" />
           <span className="font-body text-[11.5px] text-white/60 lg:text-[13px]">
             Teste gratuito em 2 min
           </span>
-        </div>
+        </motion.div>
 
         {/* Title */}
-        <h1 className="mb-3.5 font-heading text-[27px] font-semibold leading-[1.2] text-white/95 tracking-tight md:text-[36px] lg:text-center lg:text-[52px] lg:leading-[1.15] lg:mb-6 lg:max-w-[700px]">
+        <motion.h1
+          className="mb-3.5 font-heading text-[27px] font-semibold leading-[1.2] text-white/95 tracking-tight md:text-[36px] lg:text-center lg:text-[52px] lg:leading-[1.15] lg:mb-6 lg:max-w-[700px]"
+          {...fadeUp(0.4)}
+        >
           Uma boa noite de sono{" "}
           <br className="hidden lg:block" />
           muda{" "}
           <span className="bg-gradient-to-br from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent">
             tudo.
           </span>
-        </h1>
+        </motion.h1>
 
         {/* Subtitle */}
-        <p className="mb-8 max-w-[260px] font-body text-sm font-light leading-relaxed text-white/45 md:max-w-[380px] md:text-base lg:text-center lg:max-w-[520px] lg:text-lg lg:leading-relaxed lg:mb-10 lg:text-white/50">
+        <motion.p
+          className="mb-8 max-w-[260px] font-body text-sm font-light leading-relaxed text-white/45 md:max-w-[380px] md:text-base lg:text-center lg:max-w-[520px] lg:text-lg lg:leading-relaxed lg:mb-10 lg:text-white/50"
+          {...fadeUp(0.55)}
+        >
           Descubra se você tem sinais de apneia obstrutiva do sono com nosso
           teste rápido e gratuito.
-        </p>
+        </motion.p>
 
-        {/* CTAs — stacked mobile, side by side desktop */}
-        <div className="mt-auto flex w-full flex-col gap-2.5 md:mt-0 lg:mt-0 lg:flex-row lg:justify-center lg:gap-4 lg:max-w-[520px] lg:mx-auto">
+        {/* CTAs */}
+        <motion.div
+          className="mt-auto flex w-full flex-col gap-2.5 md:mt-0 lg:mt-0 lg:flex-row lg:justify-center lg:gap-4 lg:max-w-[520px] lg:mx-auto"
+          {...fadeUp(0.7)}
+        >
           <Button
             variant="primary"
             onClick={onStartQuiz}
@@ -103,10 +122,13 @@ export function Hero({ onStartQuiz }: HeroProps) {
             <ChevronDown className="h-[13px] w-[13px] opacity-50" />
             Saiba mais sobre apneia
           </Button>
-        </div>
+        </motion.div>
 
         {/* Stats */}
-        <div className="mt-4 grid w-full grid-cols-3 gap-px overflow-hidden rounded-xl bg-white/[0.04] md:max-w-[380px] lg:mt-10 lg:mx-auto lg:max-w-[540px] lg:rounded-2xl">
+        <motion.div
+          className="mt-4 grid w-full grid-cols-3 gap-px overflow-hidden rounded-xl bg-white/[0.04] md:max-w-[380px] lg:mt-10 lg:mx-auto lg:max-w-[540px] lg:rounded-2xl"
+          {...fadeUp(0.85)}
+        >
           {[
             { value: "1 em 3", label: "pessoas tem apneia" },
             { value: "80%", label: "não sabem que tem" },
@@ -124,7 +146,7 @@ export function Hero({ onStartQuiz }: HeroProps) {
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

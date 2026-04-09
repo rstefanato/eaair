@@ -11,20 +11,24 @@ interface QuizQuestionProps {
 
 export function QuizQuestion({ question, selectedIndex, onSelect }: QuizQuestionProps) {
   return (
-    <div className="flex flex-1 flex-col px-5 pb-4 pt-6 md:px-8">
-      <span className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-md bg-blue-light px-2.5 py-1 font-heading text-[10.5px] font-semibold text-blue tracking-wide">
-        {question.category}
-      </span>
+    <div className="flex flex-1 flex-col justify-between px-5 pb-4 pt-6 md:px-8">
+      {/* Pergunta no topo */}
+      <div className="mb-auto">
+        <span className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-md bg-blue-light px-2.5 py-1 font-heading text-[10.5px] font-semibold text-blue tracking-wide">
+          {question.category}
+        </span>
 
-      <h2 className="mb-1.5 font-heading text-[21px] font-semibold leading-[1.3] text-dark tracking-tight">
-        {question.question}
-      </h2>
+        <h2 className="mb-1.5 font-heading text-[21px] font-semibold leading-[1.3] text-dark tracking-tight">
+          {question.question}
+        </h2>
 
-      <p className="mb-6 font-body text-[13px] text-text-mid leading-relaxed">
-        {question.hint}
-      </p>
+        <p className="font-body text-[13px] text-text-mid leading-relaxed">
+          {question.hint}
+        </p>
+      </div>
 
-      <div className="flex flex-col gap-2.5" role="radiogroup" aria-label={question.question}>
+      {/* Respostas alinhadas embaixo */}
+      <div className="flex flex-col gap-2.5 pt-4" role="radiogroup" aria-label={question.question}>
         {question.options.map((opt, i) => {
           const isSelected = selectedIndex === i;
           return (

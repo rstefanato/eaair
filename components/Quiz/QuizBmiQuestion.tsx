@@ -29,20 +29,24 @@ export function QuizBmiQuestion({ onSubmit }: QuizBmiQuestionProps) {
   };
 
   return (
-    <div className="flex flex-1 flex-col px-5 pb-4 pt-6 md:px-8">
-      <span className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-md bg-blue-light px-2.5 py-1 font-heading text-[10.5px] font-semibold text-blue tracking-wide">
-        IMC
-      </span>
+    <div className="flex flex-1 flex-col justify-between px-5 pb-4 pt-6 md:px-8">
+      {/* Pergunta no topo */}
+      <div className="mb-auto">
+        <span className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-md bg-blue-light px-2.5 py-1 font-heading text-[10.5px] font-semibold text-blue tracking-wide">
+          IMC
+        </span>
 
-      <h2 className="mb-1.5 font-heading text-[21px] font-semibold leading-[1.3] text-dark tracking-tight">
-        Qual seu peso e altura?
-      </h2>
+        <h2 className="mb-1.5 font-heading text-[21px] font-semibold leading-[1.3] text-dark tracking-tight">
+          Qual seu peso e altura?
+        </h2>
 
-      <p className="mb-6 font-body text-[13px] text-text-mid leading-relaxed">
-        Usamos esses dados para avaliar um dos fatores de risco. Nenhum cálculo será exibido.
-      </p>
+        <p className="font-body text-[13px] text-text-mid leading-relaxed">
+          Usamos esses dados para avaliar um dos fatores de risco. Nenhum cálculo será exibido.
+        </p>
+      </div>
 
-      <div className="flex gap-3">
+      {/* Inputs alinhados embaixo */}
+      <div className="flex gap-3 pt-4">
         <div className="flex-1">
           <Input
             label="Peso (kg)"

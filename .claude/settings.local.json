@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:eaair.com.br)",
+      "Bash(dir \"C:\\\\Users\\\\alvar\\\\documents\\\\projetos\\\\eeair\")",
+      "WebSearch",
+      "WebFetch(domain:web.archive.org)",
+      "WebFetch(domain:webcache.googleusercontent.com)",
+      "Bash(bash:*)",
+      "WebFetch(domain:estheticaligner.com.br)",
+      "Bash(python3:*)",
+      "Bash(py --version)",
+      "Bash(where python:*)",
+      "Bash(where py:*)",
+      "Bash(python:*)",
+      "Bash(curl -o \"/c/Users/alvar/documents/projetos/eeair/public/images/ea-logo.png\" \"https://estheticaligner.com.br/wp-content/uploads/2022/02/ea-esthetic-aligner-300x65.png\")",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(taskkill /IM node.exe /F)",
+      "Bash(cmd //c \"taskkill /IM node.exe /F\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(ls app/layout.tsx app/page.tsx app/globals.css lib/utils.ts)",
+      "Bash(node -e \"const pkg = require\\('./package.json'\\); console.log\\('deps:', Object.keys\\(pkg.dependencies\\).filter\\(d => ['framer-motion','lucide-react','clsx','tailwind-merge','next','react'].includes\\(d\\)\\).join\\(', '\\)\\)\")",
+      "Bash(netstat -ano)",
+      "Bash(awk '{print $5}')",
+      "Bash(xargs -I{} taskkill //PID {} //F)",
+      "Bash(npx tsc:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(git init:*)",
+      "Bash(git reset:*)"
+    ]
+  }
+}
