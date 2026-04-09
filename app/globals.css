@@ -38,3 +38,10 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(8px, -12px); }
+  50% { transform: translate(-5px, 8px); }
+  75% { transform: translate(6px, 5px); }
+}
