@@ -5,7 +5,7 @@ description: Use when the user asks for a deep, thorough, or comprehensive code 
 
 # Deep Review
 
-Multi-pass, 13-agent code review that discovers issues, independently verifies them, and synthesizes a severity-ordered final report. Three sequential passes with maximum parallelism within each.
+Multi-pass, 15-agent code review that discovers issues, independently verifies them, and synthesizes a severity-ordered final report. Three sequential passes with maximum parallelism within each.
 
 ## Flow
 
@@ -56,7 +56,7 @@ Build a **stack summary** (e.g., "TypeScript, React, Next.js") and inject domain
 
 ## Step 2: Pass 1 — Discovery
 
-Dispatch **6 specialized agents in parallel** using the Agent tool. Each receives the full diff and the detected stack info.
+Dispatch **7 specialized agents in parallel** using the Agent tool. Each receives the full diff and the detected stack info. The Conventions agent also receives the repo path so it can read existing code.
 
 | Agent | Domain | Prompt template |
 |-------|--------|-----------------|
@@ -66,6 +66,7 @@ Dispatch **6 specialized agents in parallel** using the Agent tool. Each receive
 | 4 | Performance & Memory | `prompts/pass1-performance.md` |
 | 5 | Logic & Error Handling | `prompts/pass1-logic.md` |
 | 6 | Code Quality & Testing | `prompts/pass1-quality.md` |
+| 7 | Project Conventions | `prompts/pass1-conventions.md` |
 
 **Each agent outputs findings in this format:**
 ```
@@ -80,10 +81,11 @@ Collect all findings from all 6 agents into a single consolidated findings list.
 
 ## Step 3: Pass 2 — Verification + Rescan
 
-Dispatch **6 FRESH agents in parallel**. Each receives:
+Dispatch **7 FRESH agents in parallel**. Each receives:
 - The full diff
 - The stack info
 - **ALL findings from ALL Pass 1 agents** (cross-domain visibility)
+- The Conventions verifier also receives the repo path so it can read existing code
 
 | Agent | Domain | Prompt template |
 |-------|--------|-----------------|
@@ -93,6 +95,7 @@ Dispatch **6 FRESH agents in parallel**. Each receives:
 | 4 | Performance & Memory | `prompts/pass2-verify.md` (with domain=Performance) |
 | 5 | Logic & Error Handling | `prompts/pass2-verify.md` (with domain=Logic) |
 | 6 | Code Quality & Testing | `prompts/pass2-verify.md` (with domain=Quality) |
+| 7 | Project Conventions | `prompts/pass2-verify.md` (with domain=Conventions) |
 
 **Each agent has a triple mandate:**
 

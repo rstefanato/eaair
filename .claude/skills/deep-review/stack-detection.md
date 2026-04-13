@@ -243,3 +243,8 @@ Inject the relevant checks into the `{STACK_SPECIFIC_CHECKS}` placeholder in eac
 **Quality:**
 - Duplicated logic (3+ occurrences)
 - New code without corresponding tests
+
+**Conventions:**
+- Read 2-3 existing files similar to the ones in the diff to learn the project's patterns
+- Check CLAUDE.md, CONTRIBUTING.md, .editorconfig, linter configs for documented conventions
+- Compare naming (casing, prefixes, suffixes), file structure, import style, error handling patterns, and API design against existing code

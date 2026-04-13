@@ -18,6 +18,17 @@ Review the following diff for code quality problems and testing deficiencies. Fo
 - Unnecessary complexity — simpler approaches available, over-abstracted for current needs
 - Technical debt introduced — shortcuts that will need fixing later, TODO comments without tracking
 
+**Code verbosity & bloat — could this be shorter and clearer?**
+- Verbose code that could be expressed in fewer lines without losing clarity — look for 10-line blocks that do what 3 lines could
+- Redundant null checks or type guards where the type system or framework already guarantees the value
+- Unnecessary intermediate variables that add nothing to readability (`const x = getValue(); return x;`)
+- Boilerplate that the language/framework provides a shorter idiom for (e.g., manual loops where `.map`/`.filter` suffice, manual try/finally where `using`/`with` exists)
+- Over-configured abstractions for single-use cases — factories, builders, or strategy patterns for one implementation
+- Wrapper functions that add no logic, just re-export or re-call another function with the same signature
+- Redundant type annotations where inference is obvious and the project doesn't require explicit types everywhere
+- Unnecessary async/await on functions that don't do anything async
+- Comment clutter — comments that restate what the code already says (`// increment counter` above `counter++`)
+
 **Core testing concerns:**
 - Missing test coverage — new code paths without tests, changed behavior without updated tests
 - Tests that can never fail — assertions that always pass, mocked to the point of testing nothing

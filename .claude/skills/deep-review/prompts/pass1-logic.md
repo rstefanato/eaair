@@ -28,6 +28,17 @@ Review the following diff for correctness issues. Think like a QA engineer tryin
 - Missing cleanup on error — resources acquired before failure not released in error path
 - Error handling that changes behavior — catch blocks that silently return defaults instead of propagating
 
+**Silent fallbacks & defensive bloat — code that hides bugs instead of surfacing them:**
+- Fallback values that mask bugs — `value ?? defaultValue` or `value || fallback` where the null/undefined case indicates a real bug upstream, not an expected absence. Ask: "WHY would this value be missing? Is that a valid state or a bug?"
+- Optional chaining that hides broken invariants — `order?.items?.[0]?.product?.price ?? 0` where every `?.` silently swallows a potential null that should never happen in a correct system
+- Try/catch as control flow — `try { riskyThing() } catch { return safeDefault }` where the catch hides the root cause and returns data that looks valid but isn't
+- Defensive type checks the framework already guarantees — `if (req.body && typeof req.body === 'object')` when the middleware already parses and validates the body
+- Truthy/falsy fallbacks with zero/empty-string bugs — `config.timeout || 3000` fails when `timeout` is legitimately `0`; `name || 'Unknown'` fails when name is legitimately `""`
+- Redundant null guards on values that are never null — adding `if (x != null)` checks on a value that TypeScript types, database constraints, or upstream validation already guarantee to exist
+- Silently returning empty arrays/objects instead of throwing — `catch { return [] }` when the caller will proceed with empty data as if nothing went wrong, hiding the failure from the entire chain
+- Default parameters that mask missing data — function defaults that prevent a call-site bug from being noticed because the function silently picks up a default value
+- Boolean coercion traps — `if (!items.length)` treating `0` items as falsy works, but `if (!count)` treating a count of `0` as "missing" is a bug
+
 {STACK_SPECIFIC_CHECKS}
 
 ## Output Format
